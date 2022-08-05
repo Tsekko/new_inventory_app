@@ -8,6 +8,7 @@ class ProductCard extends ConsumerWidget {
     Key? key,
     required this.onItemQuantityUpdated,
     required this.onItemTitleUpdated,
+    required this.onEditUpdated,
     required this.index,
     required this.indexProduct,
   }) : super(key: key);
@@ -16,6 +17,7 @@ class ProductCard extends ConsumerWidget {
   final int indexProduct;
   final Function(int) onItemQuantityUpdated;
   final Function(String) onItemTitleUpdated;
+  final Function(bool) onEditUpdated;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,13 +25,12 @@ class ProductCard extends ConsumerWidget {
         .watch(productControllerProvider)
         .lstProducts[indexProduct]
         .lstItems[index];
-    bool _isEditing = false;
     TextEditingController? _controller;
 
     return Card(
       child: Column(children: [
         Expanded(
-          child: !_isEditing
+          child: !item.isEditing
               ? Text(
                   item.name,
                   style: const TextStyle(
@@ -74,7 +75,7 @@ class ProductCard extends ConsumerWidget {
                 child: ElevatedButton(
               child: const Icon(Icons.edit),
               onPressed: () {
-                _isEditing = !_isEditing;
+                onEditUpdated(!item.isEditing);
               },
             ))
           ],

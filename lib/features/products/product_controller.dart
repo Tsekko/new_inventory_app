@@ -45,4 +45,10 @@ class ProductController extends StateNotifier<ProductState> {
       toAdd,
     ]);
   }
+
+  void updateEdit(bool isEditing, int indexProduct, int index) {
+    state.lstProducts[indexProduct].lstItems[index] = state
+        .lstProducts[indexProduct].lstItems[index]
+        .copyWith(isEditing: isEditing);
+  }
 }

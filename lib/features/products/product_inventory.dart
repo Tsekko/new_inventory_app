@@ -40,6 +40,9 @@ class ProductInventory extends ConsumerWidget {
                     onItemTitleUpdated: (String title) => ref
                         .read(productControllerProvider.notifier)
                         .updateName(title, indexProduct, index),
+                    onEditUpdated: (bool isEditing) => ref
+                        .read(productControllerProvider.notifier)
+                        .updateEdit(isEditing, indexProduct, index),
                   );
                 }),
           ),
